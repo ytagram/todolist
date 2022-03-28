@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block tilte %}Login Page{% endblock %}
+{% block content%}
+<div class="container" style="text-align:center;margin-top:30px;" >
+    <h1><img src="./static/list.png" style="border:0;width:40px;height:40px;"> TIME TO DO</h1>
+</div>
+<div class="container" style="background-color:rgb(121, 115, 202);width:400px;height:450px;text-align:center;border-radius:10px;margin:0 auto;margin-top: 5px;">
+    <div class="container" style="padding-top:20px; margin-bottom:20px;">
+        <h1>Login</h1>
+    </div>
+    <div>
+        <form method="post">
+            <p><input type="text" name="id" placeholder=" User ID" required/></p>
+            <input type="password" name="pw" placeholder=" password" required/></p>
+            </p>
+            <div style="margin-top:30%;">
+            <p><input type="submit" value="login" style="color:rgb(95, 86, 211); background-color:white;width:100%;" />
+            <p><input type="button" value="sign up" style="color:white; background-color:rgb(211, 90, 86);width:100%;" onclick="location.href='/register'"/></p>
+            </div>
+        </form>
+            {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                    {% for msg in messages %}
+                        <a style="color:white;">{{msg}}</a>
+                    {% endfor %}
+                {% endif %}
+            {% endwith%}
+    </div>
+
+</div>
+{% endblock %}

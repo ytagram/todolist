@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block tilte %}User Page{% endblock %}
+{% block content%}
+
+<div style="height:55px;width:50%;;text-align:center;border-radius:5px;margin:0 auto;margin-top:30px;">
+    <h1>{% with messages = get_flashed_messages() %}
+            {% if messages %}
+                {% for msg in messages %}
+                    {{msg}}
+                {% endfor %}
+            {% endif %}
+        {% endwith%}
+    {{name}}, Welcome!</h1>
+</div>
+    <div class="container" style="text-align:center;margin-top:60px;">
+        <div style="display: inline-block;width: 300px;height: 100px;line-height: 100px;background-color:rgb(121, 115, 202);;color:white;font-weight:900;border: 0;font-size: 25px;">
+            <a style="color:white;text-decoration:none;" href="/myprofile">my profile</a>
+            <a href="/myprofile"><img src="./static/user.png" style="border:0;width:90px;height: 90px;"></a>
+        </div>
+        <div style="display: inline-block;width: 300px;height: 100px;line-height: 100px;background-color:rgb(121, 115, 202);;color:white;font-weight:900;border: 0;font-size: 25px;">
+            <a style="color:white;text-decoration:none;" href="/todo">my To do List</a>
+            <a href="/todo"><img src="./static/todo2.png" style="border:0;width:85px;height: 70px;"></a>
+        </div>
+    </div>
+</div>
+{% endblock %}

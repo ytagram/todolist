@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block tilte %}User Page{% endblock %}
+{% block content%}
+<div class="container" style="text-align:center;margin-top: 30px;" >
+    <h1>{{name}}'s profile</h1>
+</div>
+<div class="container" style="background-color:rgb(121, 115, 202);width:400px;height:410px;text-align:center;border-radius:10px;margin:0 auto;margin-top: 5px;">
+        <form action="#" method="POST">
+            <div class="container" style="padding-top:20px; margin-bottom:20px;">
+                <p style="text-align: left;">New password:</p><p><input type="password" name="newpw" placeholder="Enter New Password" required/></p>
+                <p style="text-align: left;">Confirm New password:</p><p><input type="password" name="confirmnewpw" placeholder="Enter New Password Again" required/></p>
+                <p style="text-align: left;">Please enter old password to change</p>
+                <p style="text-align: left;"><input type="password" name="pw" placeholder="Enter Old Password" required /></p>
+                <input id=button2 type="submit" name="send" value="change" >
+            </div>
+        </form>
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                {% for msg in messages %}
+                    <a style="color:white;">{{msg}}</a>
+                {% endfor %}
+            {% endif %}
+        {% endwith%}
+</div>
+{% endblock %}

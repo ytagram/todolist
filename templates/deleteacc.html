@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block tilte %}User Page{% endblock %}
+{% block content%}
+<div style="text-align:center;border-radius:5px;margin:0 auto;margin-top:30px;" >
+    <h1>Delete {{name}}'s account</h1>
+</div>
+<div class="container" style="background-color:rgb(121, 115, 202);width:400px;height:400px;text-align:center;border-radius:10px;margin:0 auto;margin-top: 5px;">
+    <div style="text-align:left;padding-top:5%;">
+        <form action="#" method="POST">
+            <p>Are You really want to delete your account?</p>
+            <p>Please enter password to delete</p>
+            <p><input type="password" name="pw" placeholder=" Enter Password" required /></p>
+            {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                    {% for msg in messages %}
+                        <a>{{msg}}</a>
+                    {% endfor %}
+                {% endif %}
+            {% endwith%}
+            <p><input type="submit" name="send" value="delete my profile" style="color:white; background-color:rgb(211, 90, 86);width:100%;"/></p>
+        </form>
+    </div>
+</div>
+{% endblock %}

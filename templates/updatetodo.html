@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block tilte %}User Page{% endblock %}
+{% block content%}
+<div class="container" style="text-align:center;margin-top:30px;" >
+    <h1>{{name}}'s To do list</h1>
+</div>
+<div class="container" style="background-color:rgb(121, 115, 202);width:400px;height:400px;text-align:center;border-radius:10px;margin:0 auto;margin-top: 5px;">
+    <div class="container" style="padding-top:20px; margin-bottom:20px;">
+        <h1></h1>
+    </div>
+        <p>
+            <form action="#" method="POST">
+                <p><input type="text" name="tnm" placeholder="Enter tname" value=" {{tname}}" required/></p>
+                <p><input type="text" name="cont" placeholder="Enter content" value=" {{content}}" required/></p>
+                <p><input type="date" name="date" value=" {{date}}"/></p>
+                <p><input type="time" name="time" value=" {{time}}"/></p>
+                <input type="submit" name="send" value="update"  style="color:white; background-color:rgb(95, 86, 211);width:100%;"/>
+            </form>
+        </p>
+        <p>
+            <form action="#" method="POST">
+                <input type="submit" name="send" value="delete" style="color:white; background-color:rgb(211, 90, 86);width:100%;"/>
+            </form>
+        </P>
+</div>
+{% endblock %}
+
+<!-- .strftime('%H:%M') -->

@@ -1,0 +1,67 @@
+p { 
+    color:white;
+    font-weight:900;
+}    
+.navbar-custom {
+   background-color: rgb(121, 115, 202);
+  }
+.navbar-custom .navbar-brand,
+.navbar-custom .navbar-text{
+  color: white;
+  }
+  .navbar-custom .navbar-nav .nav-link {
+  color: white;
+  } 
+
+input {
+  border-color:white;
+  border-radius:5px;
+  border: 0;
+  height: 40px;
+  width: 100%;
+}
+td {overflow:hidden;text-overflow: ellipsis; }
+
+#title {
+    text-align:center;
+    border-radius:5px;
+    margin:0 auto;
+    margin-top:30px;
+}
+
+#button1 {
+    border-color:white;
+    border-radius:5px;
+    border: 0;
+    color:white; 
+    background-color:rgb(95, 86, 211);
+    width:100%;
+}
+
+#button2 {
+    border-color:white;
+    border-radius:5px;
+    border: 0;
+    color:rgb(95, 86, 211); 
+    background-color:white;
+    width:100%;
+}
+
+#button3 {
+    border-color:white;
+    border-radius:5px;
+    border: 0;
+    color:white; 
+    background-color:rgb(211, 90, 86);
+    width:100%;
+}
+
+#bg-box {
+    background-color:rgb(121, 115, 202);
+    width:400px;
+    height:400px;
+    text-align:center;
+    border-radius:10px;
+    margin:0 auto;
+    margin-top: 5px;
+}

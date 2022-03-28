@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block tilte %}User Page{% endblock %}
+{% block content%}
+<div id=tiltie style="text-align:center;border-radius:5px;margin:0 auto;margin-top:30px;">
+    <h1 >{{name}}'s profile</h1>
+</div>
+<div class="container" style="background-color:rgb(121, 115, 202);width:400px;height: 400px;text-align:center;border-radius:10px;margin:0 auto;margin-top: 5px;">
+    <div style="text-align:left;padding-top:5%;">
+        <table border="0" style="color:white;text-align:center;width:100%;table-layout: fixed;font-weight: 700;">
+            <tr>
+                <td>User ID</td>
+                <td>{{usr}}</td>
+            </tr>
+            <tr>
+                <td>User Name</td>
+                <td>{{name}}</td>
+            </tr>
+            <tr>
+                <td>User Email</td>
+                <td>{{email}}</td>
+            </tr>
+        </table>
+    </div>
+    <div style="margin-top:35%;">
+        <p>
+            <input id=button1 type="button" value="update profile" onclick="location.href='/profile'"/>
+        </p>
+        <p>
+            <input id=button2 type="button" onclick="location.href='/changepw'" value="change password" />
+        </p>
+        <p>
+            <input id=button3 type="submit" name="send" value="delete my account" onclick="location.href='/deleteacc'" />
+        
+    </div>
+    </div>
+{% endblock %}

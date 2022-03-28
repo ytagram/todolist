@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block tilte %}User Page{% endblock %}
+{% block content%}
+    
+<div class="container" style="text-align:center;margin-top: 30px;" >
+    <h1>{{name}}'s profile</h1>
+</div>
+<div class="container" style="background-color:rgb(121, 115, 202);width:400px;height:450px;text-align:center;border-radius:10px;margin:0 auto;margin-top: 5px;">
+    <form action="#" method="POST">
+        <div class="container" style="padding-top:20px; margin-bottom:20px;">
+            <p style="text-align: left;">User ID: {{usr}}</p>
+            <p style="text-align: left;">Name: {{name}}</p>
+            <p><input type="name" name="nm" placeholder="Enter New Username" required/></p>
+            <p style="text-align: left;">Email: {{email}}</p>
+            <p><input type="email" name="email" placeholder="Enter New Email" required/></p>
+            <p style="text-align: left;">Please enter password to update</p>
+            <p><input type="password" name="pw" placeholder="Enter Password" required /></p>
+            <input type="submit" name="send" value="update"  style="color:white; background-color:rgb(95, 86, 211);width:100%;"/></p>
+            
+        </div>
+    </form>
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            {% for msg in messages %}
+                <a style="color:white;">{{msg}}</a>
+            {% endfor %}
+        {% endif %}
+    {% endwith%}
+</div>
+{% endblock %}

@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block tilte %}To do list{% endblock %}
+{% block content%}
+<div class="container" style="text-align:center;margin-top: 30px;" >
+    <h1>{{name}}'s To do list</h1>
+</div>
+<div class="container" style="background-color:rgb(121, 115, 202);width:100%;;text-align:center;border-radius:10px;margin:0 auto;margin-top: 5px;">
+    <div class="container" style="padding-top:20px; margin-bottom:20px;">
+        <table border="0" style="color:white;text-align:center;width:100%;table-layout: fixed;">
+            <thead>
+                <tr>
+                    <th>NO.</th>
+                    <th>To do</th>
+                    <th>content</th>            
+                    <th>date</th>
+                    <th>time</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in todos %}
+                <tr>
+                    <td>{{loop.index}}</td> 
+                    <td>{{item.tname}}</td> 
+                    <td>{{item.content}}</td>
+                    <td>{{item.date}}</td>
+                    <td>{{item.time}}</td>
+                    <td><input type="button" style="background-color:white;width:100px;height:30px;;border-radius:5px;color:rgb(121, 115, 202);border:0;" onclick="{{'location.href=\'/updatetodo/{}\''.format(item._tid)}}" value="infotmation"></td>
+                {% endfor%}
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div style="padding-bottom:2%;">
+        <p><input type="button" onclick="location.href='/addtodo'" value="add to do" style="color:rgb(95, 86, 211); background-color:white;width:25%;"></p>
+    </div>
+</div>
+{% endblock %}
