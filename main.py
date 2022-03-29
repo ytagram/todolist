@@ -65,23 +65,6 @@ class todos(db.Model):
         self.date = date
         self.time = time
 
-@app.route("/send_email", methods=['POST','GET'])
-def send_email():
-    # if "id" in session:
-        # id = session["id"]
-        # found_user = users.query.filter_by(id=id).first()
-        # found_todo = todos.query.fliter_by(_tid=tid).first()
-        email = "lyt10055@gmail.com"
-        subject = 'Hello'
-        message = 'test'
-        time = request.form["time"]
-        msg = Message(
-            subject=subject,
-            recipients=[email],
-            html=message
-        )
-        mail.send(msg)
-        return render_template("login.html")
 
 @app.route("/")
 def home():
@@ -292,6 +275,13 @@ def addtodo():
                     db.session.add(todo)
                     db.session.commit()
                     return redirect(url_for("todo"))
+                elif request.form["time"]:
+                    date = None
+                    time = datetime.strptime(request.form["time"], "%H:%M").time()
+                    todo = todos(tname,content,date,time,id)
+                    db.session.add(todo)
+                    db.session.commit()
+                    return redirect(url_for("todo"))
                 else:
                     date = None
                     time = None
@@ -314,32 +304,17 @@ def updatetodo(tid):
         if found_todo and found_user.id == found_todo.user_id:
             if request.method == "POST":
                 if request.values['send']=='update':
-                    if request.form["date"]:
-                        if request.form["time"]:
                             found_todo.tname = request.form["tnm"]
                             found_todo.content = request.form["cont"]
-                            found_todo.date = datetime.strptime(request.form["date"], "%Y-%m-%d").date()
-                            found_todo.time = datetime.strptime(request.form["time"], "%H:%M").time()
+                            found_todo.date = None
+                            found_todo.time = None
+                            if(request.form["date"]):
+                                found_todo.date = datetime.strptime(request.form["date"], "%Y-%m-%d").date()
+                            if(request.form["time"]):
+                                time = str(request.form["time"])
+                                found_todo.time = datetime.strptime(time, "%H:%M").time()
                             db.session.commit()
                             return redirect(url_for("todo"))
-                        else:
-                            found_todo.tname = request.form["tnm"]
-                            found_todo.content = request.form["cont"]
-                            found_todo.date = datetime.strptime(request.form["date"], "%Y-%m-%d").date()
-                            db.session.commit()
-                            return redirect(url_for("todo"))
-                    elif request.form["time"]:
-                        found_todo.tname = request.form["tnm"]
-                        found_todo.content = request.form["cont"]
-                        found_todo.time = datetime.strptime(request.form["time"], "%H:%M").time()
-                        db.session.commit()
-                        return redirect(url_for("todo"))
-                    else:
-                        found_todo.tname = request.form["tnm"]
-                        found_todo.content = request.form["cont"]
-                        db.session.commit()
-                        return redirect(url_for("todo"))
-
                 if request.values['send']=='delete':
                         db.session.delete(found_todo)
                         db.session.commit()
@@ -359,9 +334,8 @@ def logout():
     return redirect(url_for("login"))
 
 
-
 if __name__ == "__main__":
-    # db.create_all()
+    db.create_all()
     # found = todos.query.filter_by(_tid=1).first()
     # found2 = todos.query.filter_by(_tid=2).first()
     # db.session.delete(found)
