@@ -262,33 +262,17 @@ def addtodo():
             if request.values['send']=='add':
                 tname = request.form["tnm"]
                 content = request.form["cont"]
+                time = None
+                date = None
                 if request.form["date"]:
                     date = datetime.strptime(request.form["date"], "%Y-%m-%d").date()
-                    if request.form["time"]:
-                        time = datetime.strptime(request.form["time"], "%H:%M").time()
-                        todo = todos(tname,content,date,time,id)
-                        db.session.add(todo)
-                        db.session.commit()
-                        return redirect(url_for("todo")) 
-                    time = None
-                    todo = todos(tname,content,date,time,id)
-                    db.session.add(todo)
-                    db.session.commit()
-                    return redirect(url_for("todo"))
-                elif request.form["time"]:
-                    date = None
-                    time = datetime.strptime(request.form["time"], "%H:%M").time()
-                    todo = todos(tname,content,date,time,id)
-                    db.session.add(todo)
-                    db.session.commit()
-                    return redirect(url_for("todo"))
-                else:
-                    date = None
-                    time = None
-                    todo = todos(tname,content,date,time,id)
-                    db.session.add(todo)
-                    db.session.commit()
-                    return redirect(url_for("todo"))
+                if request.form["time"]:
+                    timestr = str(request.form["time"])
+                    time = datetime.strptime(timestr, "%H:%M").time()
+                todo = todos(tname,content,date,time,id)
+                db.session.add(todo)
+                db.session.commit()
+                return redirect(url_for("todo"))
         return render_template("addtodo.html", name=found_user.name)
     else:
         flash("You are not logged in!")
@@ -304,22 +288,24 @@ def updatetodo(tid):
         if found_todo and found_user.id == found_todo.user_id:
             if request.method == "POST":
                 if request.values['send']=='update':
-                            found_todo.tname = request.form["tnm"]
-                            found_todo.content = request.form["cont"]
-                            found_todo.date = None
-                            found_todo.time = None
-                            if(request.form["date"]):
-                                found_todo.date = datetime.strptime(request.form["date"], "%Y-%m-%d").date()
-                            if(request.form["time"]):
-                                time = str(request.form["time"])
-                                found_todo.time = datetime.strptime(time, "%H:%M").time()
-                            db.session.commit()
-                            return redirect(url_for("todo"))
-                if request.values['send']=='delete':
-                        db.session.delete(found_todo)
+                        found_todo.tname = request.form["tnm"]
+                        found_todo.content = request.form["cont"]
+                        found_todo.date = None
+                        found_todo.time = None
+                        if(request.form["date"]):
+                            found_todo.date = datetime.strptime(request.form["date"], "%Y-%m-%d").date()
+                        if(request.form["time"]):
+                            time = str(request.form["time"])
+                            found_todo.time = datetime.strptime(time, "%H:%M").time()
                         db.session.commit()
                         return redirect(url_for("todo"))
-            return render_template('updatetodo.html',name=found_user.name,tname=found_todo.tname,content=found_todo.content,date=found_todo.date,time=found_todo.time)    
+                if request.values['send']=='delete':
+                    db.session.delete(found_todo)
+                    db.session.commit()
+                    return redirect(url_for("todo"))
+            timestr = str(found_todo.time)
+            timestr = timestr[0:-3]
+            return render_template('updatetodo.html',name=found_user.name,tname=found_todo.tname,content=found_todo.content,date=found_todo.date,time=timestr)    
         else:
             return redirect(url_for("todo"))
     else:
